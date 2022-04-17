@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="heading">Monte Carlo Simulation</div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Dish Name</th>
+                <th>Preperation Time</th>
+                <th>No. of orders</th>
+                <th>Probability</th>
+                <th>Commulative Probability</th>
+                <th>Random Number Range</th>
+                <th>Remove</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% items.forEach(function(item, index){ %>
+            <tr>
+                <td><%=item.dishName%></td>
+                <td><%=item.prepTime%></td>
+                <td><%=item.totalOrder%></td>
+                <td><%=item.probability%></td>
+                <td><%=item.commulative%></td>
+                <td><%=item.rStart%>-<%=item.rEnd-1%></td>
+                <td>
+                    <form action="/" method="post">
+                        <button name="removeBtn" value="<%=index%>">X</button>
+                    </form>
+            </td>
+            </tr>
+            <% }); %>
+        </tbody>
+    </table>
+
+    <br>
+
+    <form action="/" method="post">
+        <label for="dishName">Dish : </label>
+        <input type="text" id="dishName" name="dishName">
+        <label for="dishTime">Prepration Time : </label>
+        <input type="number" name="dishTime" id="dishTime">
+        <label for="dishOrder">Total order : </label>
+        <input type="number" name="dishOrder" id="dishOrder">
+        <button name="addBtn">Add</button>
+    </form>
+
+    <br>
+    <hr>
+    <br>
+    <!-- ------------SIMULATION------------------- -->
+    <form action="/" method="post">
+        <label for="startTime">Start Time : </label>        
+        <input type="time" name="startTime" id="startTime" value="16:00">
+        <label for="endTime">End Time : </label>        
+        <input type="time" name="endTime" id="endendTime" value="22:00">
+        <label for="avgTime">Avg Time : </label>        
+        <input type="number" name="avgTime" id="avgTime" value="20">
+        <button name="simulateBtn">Simulate</button>
+    </form>
+
+    <br>
+
+    <table>
+        <thead>    
+            <tr>
+                <th>Customer</th>
+                <th>Schedule Arrival</th>
+                <th>Random No. generated</th>
+                <th>Selected Dish</th>
+                <th>Service Start</th>
+                <th>Service Duration</th>
+                <th>Service End</th>
+                <th>Waiting Time</th>
+                <th>Ideal Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% simArr.forEach(function(sim){ %>
+            <tr>
+                <td><%=sim.customerNo%></td>
+                <td><%=sim.scheduleArrival%></td>
+                <td><%=sim.randomNumberGen%></td>
+                <td><%=sim.selectedDish%></td>
+                <td><%=sim.serviceStart%></td>
+                <td><%=sim.serviceDuration%></td>
+                <td><%=sim.serviceEnd%></td>
+                <td><%=sim.waitingTime%></td>
+                <td><%=sim.idealTime%></td>
+            </tr>
+            <% }); %>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th><%=TotalWaitingTime%></th>
+                <th><%=TotalIdealTime%></th>
+            </tr>
+        </tfoot>
+    </table>
+    <div class="heading">Average Waiting Time : <%=avgWT%></div>
+</body>
+</html>
